@@ -6,7 +6,7 @@ Software are containers  you can download.
 You would need to change how you call the software with singularity, how to access to the files and how jobs are submitted in your own cluster.
 
 ## Admixture WW and Admixture 
-Just a wrap-uo script in each folder to call the Admixture procedure encoded here: pierrespc/admixture
+Just a wrap-uo script in each folder to call the Admixture procedure encoded here: https://gitlab.pasteur.fr/pluisi/admixture
 
 ## fineStructure
 Scripts from stage0 to stage6 described Ruderman, Luisi et al. 2022 paper .
