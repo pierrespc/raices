@@ -1,1 +1,3 @@
-# pierrespc-FineStructure_Chromopainter_Raices-
+# Scripts to estimate  genetic ancestry proportions
+Using either Admixture or Sourcefind
+
