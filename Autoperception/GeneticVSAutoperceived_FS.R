@@ -26,7 +26,7 @@ for(meth in c("AdmComb","SFComb")){
   #title(main=paste("Eastern Mediterranean Ancestry:\nGenetic (",meth,") VS Self-perceived\nWilcoxon-test P = ",round(wt,digits = 4),sep=""),
   #    xlab="Self-perceived Ancestry",
   #    ylab="Genetic ancestry")
-  title(main=paste("Eastern Mediterranean Ancestry:\nWilcoxon-test P = ",round(wt,digits = 4),sep=""),
+  title(main=paste("North Africa to Central South Asia Ancestries:\nWilcoxon-test P = ",round(wt,digits = 4),sep=""),
             xlab="Self-perceived Ancestry",
             ylab=paste("Genetic ancestry (",ifelse(meth=="AdmComb","Admixture","SourceFind"),")",sep=""))
 

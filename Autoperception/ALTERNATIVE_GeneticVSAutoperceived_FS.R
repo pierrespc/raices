@@ -9,12 +9,11 @@ tab<-read.table("../AutoperceptionResults.txt",stringsAsFactors = F,header=T,sep
 proportion<-read.table("../SummaryAncestryComponents_Admixture_SF.ByInd.tsv",stringsAsFactors = F,header=T,sep="\t")
 
 
-tab<-merge(tab,proportion[,grepl("SFComb",names(proportion)) | grepl("AdmComb",names(proportion)) | names(proportion) =="Ind" ],by.x="Target",by.y="Ind")
+tab<-merge(tab,proportion[,!( grepl("SFComb",names(proportion)) | grepl("Adm",names(proportion)) | grepl("Population",names(proportion)))],by.x="Target",by.y="Ind")
 
-names(tab)[names(tab)=="AdmComb.MiddleEastNorthAfricaCaucasus"]<-"AdmComb.Oriental"
-names(tab)[names(tab)=="SFComb.EasternMediterranean"]<-"SFComb.Oriental"
-for(meth in c("AdmComb","SFComb")){
-  pdf(paste("Oriental_GeneticVsAutoperception_",meth,".pdf",sep=""),height=5,width=5)
+tab$SFComb.Oriental=apply(tab[,c("SF.Caucasus","SF.Levant","SF.NorthAfricaLevant","SF.NorthAfricaCentralSouthAsia")],1,sum)
+meth="SFComb"
+pdf(paste("ALTERNATIVE_Oriental_GeneticVsAutoperception_",meth,".pdf",sep=""),height=5,width=5)
   ###oriental
   ylim=c(0,max(tab[,paste(meth,".Oriental",sep="")]))
   #ylim=c(0,1)

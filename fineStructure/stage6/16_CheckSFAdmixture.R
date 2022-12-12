@@ -15,7 +15,7 @@ ListCombAdmix=list("SubsaharanAfrica"="Yoruba",
 ###Final choice  of grouping: All "Oriental" clusters grouped together
 listCombSF<-list(
   "SubsaharanAfrica"=c("SouthernAfrica","EasternAfrica","GuineanGulf","WesternAfrica","WesternAfrica2"),
-  "EasternMediterranean"=c("NorthAfricaLevant","CentralSouthAsia",
+  "NorthAfricaToCentralSouthAsia"=c("NorthAfricaLevant","CentralSouthAsia",
                            "NorthAfricaCentralSouthAsia",
                            "Caucasus","Levant"),
   "Europe"=c("NorthEurope","Basque","WestEuropeCentralEurope","Sardinia","Italy","Spain"),
@@ -55,7 +55,7 @@ colorLISTS[[paste("c",19)]] <- c(
 )
 
 colorLISTS[[paste("c",4)]]<-c("Europe"="darkorange",
-      "EasternMediterranean"="brown",
+      "NorthAfricaToCentralSouthAsia"="brown",
       "NativeAmerican"="cadetblue",
       "SubsaharanAfrica"="seagreen")
 
@@ -501,3 +501,42 @@ for(pop in unique(out$Population)){
   outByPop<-rbind(outByPop,cbind(Population=pop,N=nrow(tmp),Stat=row.names(tmp2),tmp2))
 }
 write.table(outByPop,"../../../SummaryAncestryComponents_Admixture_SF.ByPOP.tsv",col.names = T,row.names = F,sep="\t",quote=F)
+
+
+
+####barplot
+pdf("Ancestry_SourceFind_Barplots.pdf")
+outPM<-out[ grepl("PuertoMadryn",out$Ind),grepl("Comb",names(out))]
+plot(0,0,"n",xlim=c(1,nrow(outPM)),
+     ylim=c(-1,1),ann=F,axes=F)
+title(main="Genetic Ancestry Proportion Estimates per Individual\nIn Puerto Madryn\nMergin Components")
+axis(2,at=seq(-1,1,0.25),labels = c(1,0.75,0.5,0.25,0,0.25,0.5,0.75,1))
+axis(4,at=c(-0.5,0.5),labels = c("Admixture","SourceFind"),tick = F,line=-2)
+for(x in c(1:nrow(outPM))){
+  ybottom=0
+  for(comp in names(outPM)[ grepl("SFComb",names(outPM))]){
+    ytop=ybottom+outPM[x,comp]
+    rect(xleft = x-0.5,
+         xright=x+0.5,
+         ybottom=ybottom,
+         ytop=ytop,
+         border=NA,
+         col=colorLISTS[[paste("c",4)]][str_remove(comp,"SFComb.")])
+    ybottom=ytop
+  }
+  
+  ybottom=0
+  for(comp in names(outPM)[ grepl("AdmComb",names(outPM))]){
+    ytop=ybottom-outPM[x,comp]
+    rect(xleft = x-0.5,
+         xright=x+0.5,
+         ybottom=ybottom,
+         ytop=ytop,
+         border=NA,
+         col=colorLISTS[[paste("c",5)]][str_remove(comp,"AdmComb.")])
+    ybottom=ytop
+  }
+}
+segments(x0 = 0.5,x1=nrow(outPM)+0.5,
+         y0=0,y1=0,lwd=2)
+dev.off()

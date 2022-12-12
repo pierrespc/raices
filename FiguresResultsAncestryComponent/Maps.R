@@ -132,13 +132,13 @@ groups<-list(
   "WesternAfrica"="SubsaharanAfrica",
   "WesternAfrica2"="SubsaharanAfrica",
   
-  "Caucasus"="EasternMediterranean",
-  "Levant"="EasternMediterranean",
+  "Caucasus"="              NorthAfricaToCentralSouthAsia",
+  "Levant"="              NorthAfricaToCentralSouthAsia",
   
-  "MiddleEast"="EasternMediterranean",
-  "CentralSouthAsia"="EasternMediterranean",
+  "MiddleEast"="              NorthAfricaToCentralSouthAsia",
+  "CentralSouthAsia"="              NorthAfricaToCentralSouthAsia",
   
-  "NorthAfrica"="EasternMediterranean",
+  "NorthAfrica"="              NorthAfricaToCentralSouthAsia",
   
   "NorthEurope"="Europe",
   "Basque"="Europe",
@@ -275,8 +275,8 @@ LONG=scatter19GROUP_PM$x[1]
 LAT=scatter19GROUP_PM$y[1]
 
 
-size1=2.5
-size2=2.2
+size1=2.2
+size2=2.1
 
 
 ####prepare the annotation bar
@@ -331,7 +331,7 @@ p <- ggplot(world, aes(long, lat)) +
   labs(#title = paste("Proportion of \"donor\" individuals assigned to each cluster\t / \t Genetic ancestry proportion estimates in Puerto Madryn",sep=""),
        fill="19 Clusters") +
   annotate(geom="text",x=LONG+40,y=LAT+28,label="19 Clusters",size=5)+
-  annotate(geom="text",x=LONG+40,y=LAT+3,label="6 Cluster Groups",size=5)+
+  annotate(geom="text",x=LONG+40,y=LAT+3,label="4 Cluster Groups",size=5)+
   annotate(geom="rect",xmin=-190,xmax=xright,ymax=ytop+1*step,ymin=-90,fill='white',color="black")+
   annotate(geom="rect",xmin = xleft,xmax=xleft+step,ymin = seq(ytop,ybottom,-step),ymax = seq(ytop,ybottom,-step)+step*0.9,fill=colorsLEG$fill,color=colorsLEG$border)+
   annotate(geom="text",x=xleft+step*1.1,y=seq(ytop,ybottom,-step)+step/2,label=colorsLEG$pop,color=colorsLEG$col,size=as.numeric(colorsLEG$size),hjust = colorsLEG$hjust,vjust = "centre")+
